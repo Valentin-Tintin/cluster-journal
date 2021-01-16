@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+//Dies ist ein Test
+
 @main
 struct Cluster_JournalApp: App {
     let persistenceController = PersistenceController.shared
