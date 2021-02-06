@@ -12,10 +12,9 @@ import SwiftUI
 @main
 struct Cluster_JournalApp: App {
     let persistenceController = PersistenceController.shared
-
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            JournalListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

@@ -15,7 +15,9 @@
 		A1D0C868258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C866258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld */; };
 		A1D0C873258BAE8D009C5C51 /* Cluster_JournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C872258BAE8D009C5C51 /* Cluster_JournalTests.swift */; };
 		A1D0C87E258BAE8D009C5C51 /* Cluster_JournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C87D258BAE8D009C5C51 /* Cluster_JournalUITests.swift */; };
-		A1D0C890258BB598009C5C51 /* LogbuchEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C88F258BB598009C5C51 /* LogbuchEntry.swift */; };
+		A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */; };
+		A1D40F2225CF1EC9002DF3C8 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */; };
+		A1D40F2825CF206A002DF3C8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F2725CF206A002DF3C8 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +52,9 @@
 		A1D0C879258BAE8D009C5C51 /* Cluster JournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cluster JournalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D0C87D258BAE8D009C5C51 /* Cluster_JournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cluster_JournalUITests.swift; sourceTree = "<group>"; };
 		A1D0C87F258BAE8D009C5C51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1D0C88F258BB598009C5C51 /* LogbuchEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbuchEntry.swift; sourceTree = "<group>"; };
+		A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbuchEntryView.swift; sourceTree = "<group>"; };
+		A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
+		A1D40F2725CF206A002DF3C8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 		A1D0C85A258BAE8A009C5C51 /* Cluster Journal */ = {
 			isa = PBXGroup;
 			children = (
+				A1D40F2625CF2058002DF3C8 /* Extensions */,
+				A1F3A50625CEAAC1009AD009 /* Model */,
 				A1D0C88E258BB463009C5C51 /* Views */,
 				A1D0C85B258BAE8A009C5C51 /* Cluster_JournalApp.swift */,
 				A1D0C85D258BAE8A009C5C51 /* ContentView.swift */,
@@ -142,9 +148,25 @@
 		A1D0C88E258BB463009C5C51 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A1D0C88F258BB598009C5C51 /* LogbuchEntry.swift */,
+				A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */,
+				A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A1D40F2625CF2058002DF3C8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A1D40F2725CF206A002DF3C8 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A1F3A50625CEAAC1009AD009 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,11 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D40F2225CF1EC9002DF3C8 /* JournalListView.swift in Sources */,
 				A1D0C868258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld in Sources */,
 				A1D0C865258BAE8D009C5C51 /* Persistence.swift in Sources */,
 				A1D0C85E258BAE8A009C5C51 /* ContentView.swift in Sources */,
-				A1D0C890258BB598009C5C51 /* LogbuchEntry.swift in Sources */,
+				A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */,
 				A1D0C85C258BAE8A009C5C51 /* Cluster_JournalApp.swift in Sources */,
+				A1D40F2825CF206A002DF3C8 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
