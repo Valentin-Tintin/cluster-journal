@@ -10,23 +10,46 @@ import SwiftUI
 struct JournalListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \LogbuchEntry.timestamp, ascending: true)], predicate: NSPredicate.all) var entries: FetchedResults<LogbuchEntry>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \SuperJournalEntry.timestamp, ascending: true)], predicate: NSPredicate.all) var entries: FetchedResults<SuperJournalEntry>
     
     
     var body: some View {
-        Button("degug_add", action: createEntry)
-        ForEach(entries) { entry in
-            LogbuchEntryView(entry: entry)
+        NavigationView {
+            VStack {
+                Button("degug_add_default", action: createEntry)
+                Button("degug_add_öpnv", action: createPublicTransportEntry)
+                ForEach(entries) { entry in
+                    JournalListItemView(entry: entry)
+                }
+            }
+            
         }
+        
     }
     
     private func createEntry() {
-        var newItem = LogbuchEntry(context: viewContext)
+        let newItem = DefaultJournalEntry(context: viewContext)
         newItem.id = UUID()
-        newItem.notes = "Notiz für \(newItem.id?.uuidString ?? "keine ID gefunden")"
+        newItem.notes = "DefaultJournal Entry"
         newItem.mask = true
         newItem.timestamp = Date()
         try? viewContext.save()
+    }
+    
+    private func createPublicTransportEntry() {
+        let newItem = PublicTransportJournalEntry(context: viewContext)
+        newItem.id = UUID()
+        newItem.typeDiscriminator = .PublicTransport
+        newItem.notes = "ÖPNV Entry (\(newItem.id?.uuidString ?? "No uid found")"
+        newItem.code = "RB3"
+        newItem.timestamp = Date()
+        print(newItem)
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving")
+        }
+        
     }
 }
 

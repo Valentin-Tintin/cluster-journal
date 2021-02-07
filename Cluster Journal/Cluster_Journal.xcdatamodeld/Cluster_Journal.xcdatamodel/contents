@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H512" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
-    <entity name="LogbuchEntry" representedClassName="LogbuchEntry" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    <entity name="DefaultJournalEntry" representedClassName="DefaultJournalEntry" parentEntity="SuperJournalEntry" syncable="YES" codeGenerationType="class">
         <attribute name="mask" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="outside" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="PublicTransportJournalEntry" representedClassName="PublicTransportJournalEntry" parentEntity="SuperJournalEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SuperJournalEntry" representedClassName="SuperJournalEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="typeDiscriminator_" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-63" positionY="-18" width="128" height="44"/>
-        <element name="LogbuchEntry" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="DefaultJournalEntry" positionX="-410.6328125" positionY="-237.9453125" width="128" height="73"/>
+        <element name="PublicTransportJournalEntry" positionX="-261" positionY="-117" width="128" height="43"/>
+        <element name="SuperJournalEntry" positionX="-281.53515625" positionY="-38.2890625" width="128" height="103"/>
     </elements>
 </model>

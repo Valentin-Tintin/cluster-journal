@@ -12,3 +12,11 @@ extension NSPredicate {
     static var all = NSPredicate(format: "TRUEPREDICATE")
     static var none = NSPredicate(format: "FALSEPREDICATE")
 }
+
+extension Date {
+    func toString() -> String {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
+        return formatter.string(from: self)
+    }
+}

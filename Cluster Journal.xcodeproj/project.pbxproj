@@ -18,6 +18,9 @@
 		A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */; };
 		A1D40F2225CF1EC9002DF3C8 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */; };
 		A1D40F2825CF206A002DF3C8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F2725CF206A002DF3C8 /* Extensions.swift */; };
+		A1D40F3125D011A7002DF3C8 /* JournalListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */; };
+		A1D40F3725D0308D002DF3C8 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */; };
+		A1D40F4725D054A8002DF3C8 /* PublicTransportJournalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbuchEntryView.swift; sourceTree = "<group>"; };
 		A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
 		A1D40F2725CF206A002DF3C8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListItemView.swift; sourceTree = "<group>"; };
+		A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
+		A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicTransportJournalDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,8 @@
 			children = (
 				A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */,
 				A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */,
+				A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */,
+				A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -157,9 +165,18 @@
 		A1D40F2625CF2058002DF3C8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A1D40F3525D0307C002DF3C8 /* ModelExtensions */,
 				A1D40F2725CF206A002DF3C8 /* Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A1D40F3525D0307C002DF3C8 /* ModelExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */,
+			);
+			path = ModelExtensions;
 			sourceTree = "<group>";
 		};
 		A1F3A50625CEAAC1009AD009 /* Model */ = {
@@ -299,10 +316,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1D40F2225CF1EC9002DF3C8 /* JournalListView.swift in Sources */,
+				A1D40F3725D0308D002DF3C8 /* ModelExtensions.swift in Sources */,
 				A1D0C868258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld in Sources */,
 				A1D0C865258BAE8D009C5C51 /* Persistence.swift in Sources */,
+				A1D40F4725D054A8002DF3C8 /* PublicTransportJournalDetailView.swift in Sources */,
 				A1D0C85E258BAE8A009C5C51 /* ContentView.swift in Sources */,
 				A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */,
+				A1D40F3125D011A7002DF3C8 /* JournalListItemView.swift in Sources */,
 				A1D0C85C258BAE8A009C5C51 /* Cluster_JournalApp.swift in Sources */,
 				A1D40F2825CF206A002DF3C8 /* Extensions.swift in Sources */,
 			);
