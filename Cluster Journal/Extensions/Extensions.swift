@@ -17,6 +17,7 @@ extension Date {
     func toString() -> String {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
+        formatter.dateStyle = .medium
         return formatter.string(from: self)
     }
 }

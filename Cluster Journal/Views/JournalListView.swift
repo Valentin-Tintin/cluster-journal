@@ -15,13 +15,16 @@ struct JournalListView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Button("degug_add_default", action: createEntry)
-                Button("degug_add_öpnv", action: createPublicTransportEntry)
+            VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
+               
                 ForEach(entries) { entry in
                     JournalListItemView(entry: entry)
                 }
-            }
+                Spacer()
+                Button("degug_add_default", action: createEntry)
+                Divider()
+                Button("degug_add_öpnv", action: createPublicTransportEntry)
+            }.padding()
             
         }
         
