@@ -18,7 +18,7 @@ struct PublicTransportJournalDetailView: View {
     init(superEntry : SuperJournalEntry) {
         self.superEntry = superEntry
         let predicate = NSPredicate(format: "id = %@", superEntry.id?.uuidString ?? "")
-        let sortdesc = [NSSortDescriptor(key: "timestamp", ascending: true)]
+        let sortdesc = [NSSortDescriptor(keyPath: \PublicTransportJournalEntry.timestamp_, ascending: true)]
         let request = FetchRequest<PublicTransportJournalEntry>(entity: PublicTransportJournalEntry.entity(), sortDescriptors: sortdesc, predicate: predicate)
     
         self._typedEntry = request
@@ -29,7 +29,7 @@ struct PublicTransportJournalDetailView: View {
             VStack {
                 Text("ÖPNV")
                 Text(typedEntry.first?.notes ?? "default value")
-                Text(typedEntry.first?.timestamp?.toString() ?? "No date found")
+                Text(typedEntry.first?.timestamp.toString() ?? "No date found")
                 Button("delete_debug",action: deleteItem)
             }
         

@@ -10,26 +10,33 @@ import CoreData
 
 struct LogbuchEntryView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var superEntry : SuperJournalEntry
+    @State var superEntry : SuperJournalEntry
     
-    @FetchRequest var typedEntry : FetchedResults<DefaultJournalEntry>
+    @FetchRequest<DefaultJournalEntry> var typedEntry : FetchedResults<DefaultJournalEntry>
     
-    init(superEntry : SuperJournalEntry) {
-        self.superEntry = superEntry
-        let predicate = NSPredicate(format: "id = %@", superEntry.id?.uuidString ?? "")
-        let sortdesc = [NSSortDescriptor(key: "timestamp", ascending: true)]
-        let request = FetchRequest<DefaultJournalEntry>(entity: DefaultJournalEntry.entity(), sortDescriptors: sortdesc, predicate: predicate)
+    init(_ superEntry : SuperJournalEntry) {
+        _superEntry = State(initialValue: superEntry)
+        let predicate = NSPredicate(format: "id = %@", superEntry.id!.uuidString)
+        print("Id in init of LogbuchEntryView \(superEntry.id?.uuidString)")
+        let sortdesc = [NSSortDescriptor(keyPath: \DefaultJournalEntry.timestamp_, ascending: true)]
+        
     
-        self._typedEntry = request
+        _typedEntry = FetchRequest(entity: DefaultJournalEntry.entity(), sortDescriptors: sortdesc, predicate: predicate, animation :.easeIn)
+        print(_typedEntry)
     }
     	
    	var body: some View {
             VStack {
-                Text(typedEntry.first?.typeDiscriminator.rawValue ?? JournalEntryType.Default.rawValue )
+                Text(_typedEntry.wrappedValue.first!.typeDiscriminator.rawValue  )
                 Text(typedEntry.first?.notes ?? "default value")
-                Text(typedEntry.first?.timestamp?.toString() ?? "No date found")
+                Text(typedEntry.first?.timestamp.toString() ?? "No date found")
                 Button("delete_debug",action: deleteItem)
-            }
+                
+                NavigationLink(destination: EditDefaultJournalEntryForm(initialEntry: _typedEntry.wrappedValue.first)){
+                        Text("Edit")
+                  
+                }
+            }.navigationBarTitle("Test")
         
     }
     

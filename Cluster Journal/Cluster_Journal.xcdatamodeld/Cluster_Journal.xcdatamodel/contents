@@ -1,21 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H512" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H524" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DateValue" representedClassName="DateValue" syncable="YES" codeGenerationType="class">
+        <attribute name="value" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="DefaultJournalEntry" representedClassName="DefaultJournalEntry" parentEntity="SuperJournalEntry" syncable="YES" codeGenerationType="class">
         <attribute name="mask" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="outside" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
+    <entity name="EntryAtributeSection" representedClassName="EntryAtributeSection" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="attributes_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryAttribute"/>
+    </entity>
+    <entity name="EntryAttribute" representedClassName="EntryAttribute" syncable="YES" codeGenerationType="class">
+        <attribute name="boolValue" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="dateValue" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="numericValue" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="stringValue" optional="YES" attributeType="String"/>
+        <attribute name="type_" optional="YES" attributeType="String"/>
+        <relationship name="value" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateValue"/>
+    </entity>
+    <entity name="EntryType" representedClassName="EntryType" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="PublicTransportJournalEntry" representedClassName="PublicTransportJournalEntry" parentEntity="SuperJournalEntry" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SuperJournalEntry" representedClassName="SuperJournalEntry" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="notes" optional="YES" attributeType="String"/>
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="notes_" optional="YES" attributeType="String"/>
+        <attribute name="timestamp_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="typeDiscriminator_" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="Template" representedClassName="Template" syncable="YES" codeGenerationType="class">
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="sections_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryAtributeSection"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TemplateType"/>
+    </entity>
+    <entity name="TemplateType" representedClassName="TemplateType" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="icon" optional="YES" attributeType="String"/>
+        <attribute name="isDefault" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TopLevelEntry" representedClassName="TopLevelEntry" syncable="YES" codeGenerationType="class">
+        <relationship name="sections_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryAtributeSection"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryType"/>
+    </entity>
     <elements>
+        <element name="DateValue" positionX="-1360.78125" positionY="81.4921875" width="128" height="58"/>
         <element name="DefaultJournalEntry" positionX="-410.6328125" positionY="-237.9453125" width="128" height="73"/>
+        <element name="Entity" positionX="-1308.47265625" positionY="-161.2421875" width="128" height="43"/>
+        <element name="EntryAtributeSection" positionX="-1053.640625" positionY="-134.5" width="128" height="73"/>
+        <element name="EntryAttribute" positionX="-1112.91796875" positionY="20.546875" width="128" height="148"/>
         <element name="PublicTransportJournalEntry" positionX="-261" positionY="-117" width="128" height="43"/>
         <element name="SuperJournalEntry" positionX="-281.53515625" positionY="-38.2890625" width="128" height="103"/>
+        <element name="Template" positionX="-939.171875" positionY="-269.2578125" width="128" height="103"/>
+        <element name="TemplateType" positionX="-725.06640625" positionY="-34.3671875" width="128" height="103"/>
+        <element name="TopLevelEntry" positionX="-1152.47265625" positionY="-424.3203125" width="107.96875" height="73"/>
+        <element name="EntryType" positionX="-1161" positionY="-279" width="128" height="103"/>
     </elements>
 </model>

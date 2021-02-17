@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A1C23CEE25DAB90600BC184B /* CreateFromTemplateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1C23CED25DAB90600BC184B /* CreateFromTemplateView.swift */; };
 		A1D0C85C258BAE8A009C5C51 /* Cluster_JournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C85B258BAE8A009C5C51 /* Cluster_JournalApp.swift */; };
 		A1D0C85E258BAE8A009C5C51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C85D258BAE8A009C5C51 /* ContentView.swift */; };
 		A1D0C860258BAE8D009C5C51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1D0C85F258BAE8D009C5C51 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 		A1D40F3125D011A7002DF3C8 /* JournalListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */; };
 		A1D40F3725D0308D002DF3C8 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */; };
 		A1D40F4725D054A8002DF3C8 /* PublicTransportJournalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */; };
+		A1D40F4C25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F4B25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A1C23CED25DAB90600BC184B /* CreateFromTemplateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateFromTemplateView.swift; sourceTree = "<group>"; };
 		A1D0C858258BAE8A009C5C51 /* Cluster Journal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cluster Journal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D0C85B258BAE8A009C5C51 /* Cluster_JournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cluster_JournalApp.swift; sourceTree = "<group>"; };
 		A1D0C85D258BAE8A009C5C51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListItemView.swift; sourceTree = "<group>"; };
 		A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
 		A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicTransportJournalDetailView.swift; sourceTree = "<group>"; };
+		A1D40F4B25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDefaultJournalEntryForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,8 @@
 				A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */,
 				A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */,
 				A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */,
+				A1D40F4B25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift */,
+				A1C23CED25DAB90600BC184B /* CreateFromTemplateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -319,7 +325,9 @@
 				A1D40F3725D0308D002DF3C8 /* ModelExtensions.swift in Sources */,
 				A1D0C868258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld in Sources */,
 				A1D0C865258BAE8D009C5C51 /* Persistence.swift in Sources */,
+				A1D40F4C25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift in Sources */,
 				A1D40F4725D054A8002DF3C8 /* PublicTransportJournalDetailView.swift in Sources */,
+				A1C23CEE25DAB90600BC184B /* CreateFromTemplateView.swift in Sources */,
 				A1D0C85E258BAE8A009C5C51 /* ContentView.swift in Sources */,
 				A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */,
 				A1D40F3125D011A7002DF3C8 /* JournalListItemView.swift in Sources */,

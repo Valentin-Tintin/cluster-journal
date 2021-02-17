@@ -7,10 +7,19 @@
 
 import SwiftUI
 
+struct TopLevelEntryView: View {
+    var entry: TopLevelEntry
+    var body: some View {
+        Text(entry.type?.name ?? "NO VALUE")
+    }
+}
+
 struct JournalListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \SuperJournalEntry.timestamp, ascending: true)], predicate: NSPredicate.all) var entries: FetchedResults<SuperJournalEntry>
+    @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var entries: FetchedResults<TopLevelEntry>
+    
+    @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var templates: FetchedResults<Template>
     
     
     var body: some View {
@@ -18,24 +27,47 @@ struct JournalListView: View {
             VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
                
                 ForEach(entries) { entry in
-                    JournalListItemView(entry: entry)
+                    TopLevelEntryView(entry: entry)
+                    //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
+                }
+                ForEach(templates) { template in
+                    NavigationLink(destination: CreateFromTemplateView(template: template)){
+                        Text( "Create \(template.name ?? "No name found")")
+                    }
+                    
+
                 }
                 Spacer()
                 Button("degug_add_default", action: createEntry)
                 Divider()
                 Button("degug_add_öpnv", action: createPublicTransportEntry)
+               
             }.padding()
             
         }
         
     }
     
+    private func createEntryFromTemplate(template: Template) -> () -> () {
+        return {
+            let newEntry = TopLevelEntry(context: viewContext)
+            let sections: Set<EntryAtributeSection> = template.sections
+            sections.map {print($0.name)}
+            newEntry.sections = sections
+            print(newEntry.sections ?? "No data")
+        }
+        
+        
+    }
+    
     private func createEntry() {
         let newItem = DefaultJournalEntry(context: viewContext)
+        newItem.typeDiscriminator = .Default
+
         newItem.id = UUID()
         newItem.notes = "DefaultJournal Entry"
         newItem.mask = true
-        newItem.timestamp = Date()
+        newItem.timestamp_ = Date()
         try? viewContext.save()
     }
     
@@ -45,7 +77,7 @@ struct JournalListView: View {
         newItem.typeDiscriminator = .PublicTransport
         newItem.notes = "ÖPNV Entry (\(newItem.id?.uuidString ?? "No uid found")"
         newItem.code = "RB3"
-        newItem.timestamp = Date()
+        newItem.timestamp_ = Date()
         print(newItem)
         do {
             try viewContext.save()

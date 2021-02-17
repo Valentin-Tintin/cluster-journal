@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct JournalListItemView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+
     @ObservedObject var entry : SuperJournalEntry;
 
     var body: some View {
         
-        let destination : AnyView = entry.typeDiscriminator  == JournalEntryType.Default ? AnyView(LogbuchEntryView(superEntry: entry ))  : AnyView(PublicTransportJournalDetailView(superEntry: entry))
+        let destination : AnyView = entry.typeDiscriminator  == JournalEntryType.Default ? AnyView(LogbuchEntryView(entry ).environment(\.managedObjectContext, viewContext))  : AnyView(PublicTransportJournalDetailView(superEntry: entry))
         NavigationLink(destination: destination) {
         HStack(alignment: VerticalAlignment.center, spacing: 20) {
             self.getIconByType()
-            VStack(alignment: HorizontalAlignment.leading, spacing: 5 ) {
+            VStack(alignment: HorizontalAlignment.leading, spacing: 5 ) {
                    
-                Text(entry.timestamp?.toString() ?? "").font(.caption).foregroundColor(.black)
+                Text(entry.timestamp.toString()).font(.caption).foregroundColor(.black)
                     Text(entry.id?.uuidString ?? "No Id found").font(.caption).foregroundColor(.black)
                     
                     }
                 }
                 
-            }
+        }
     }
     
     
