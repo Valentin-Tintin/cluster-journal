@@ -40,10 +40,14 @@ struct CreateTemplateView: View {
     
     var body: some View {
         Text(templateType?.name ?? "No Name")
-       
-        ForEach(Array(sections)) { section in
-            Text(section.name ?? "")
+        Form {
+            ForEach(Array(sections)) { section in
+                Section(header: Text(section.name ?? "")){
+                    EntryAttributesView(attributes: section.attributes)
+                }
+            }
         }
+        
         .sheet(isPresented: self.$addSectionViewOpen) {
             AddSectionView(saveSection: addSection)
         }
@@ -71,8 +75,62 @@ struct CreateTemplateView: View {
     }
 }
 
-struct CreateTemplateView_Previews: PreviewProvider {
-    static var previews: some View {
-        CreateTemplateView()
+struct EntryAttributesView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @State var attributes: Set<EntryAttribute>
+    @State var isAddAttributeViewOpen: Bool = false
+    @State var name: String = ""
+    var body: some View {
+               
+        
+        ForEach(Array(attributes)) { attribute in
+            HStack(alignment: VerticalAlignment.center) {
+                Text(attribute.name ?? "")
+                Text(attribute.type.rawValue).foregroundColor(.gray)
+            }
+            
+        }
+        
+        .sheet(isPresented: $isAddAttributeViewOpen) {
+            CreateAttrView(saveAttr: saveAttr) .environment(\.managedObjectContext, viewContext)
+            
+        }
+        Button("Add Attribute", action: handleAddAttr)
+    }
+    
+    func saveAttr(attr: EntryAttribute) {
+        attributes.insert(attr)
+        isAddAttributeViewOpen.toggle()
+    }
+    
+    func handleAddAttr(){
+        isAddAttributeViewOpen.toggle()
+    }
+}
+
+struct CreateAttrView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @State var name: String = ""
+    @State var type: ValueType = ValueType.String
+    var saveAttr: (_: EntryAttribute) -> Void
+    
+    var body: some View {
+        Form{
+            TextField("Name", text: $name)
+            Picker("Type", selection: $type){
+                ForEach(ValueType.allCases, id: \.self) { vType in
+                    Text(vType.rawValue)
+                }
+            }.pickerStyle(InlinePickerStyle())
+            Button("Save", action: handleSave)
+        }
+        
+    }
+    func handleSave() {
+        let newAttr = EntryAttribute(context: viewContext)
+        print(self.type.rawValue)
+        newAttr.name = name
+        newAttr.type = type
+        saveAttr(newAttr)
     }
 }

@@ -50,7 +50,6 @@ struct CreateFromTemplateView: View {
                 print("\($0.name): \($0.dateValue)")
             }
         }
-        
         try? viewContext.save()
     }
 }

@@ -73,11 +73,15 @@ extension EntryAtributeSection {
     }
 }
 
-enum ValueType: String {
+enum ValueType: String, CaseIterable, Identifiable {
     case String
     case Date
     case Boolean
     case Numeric
+    
+    var id: String {
+        self.rawValue
+    }
 }
 
 extension EntryAttribute {
