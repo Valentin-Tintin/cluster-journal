@@ -37,6 +37,7 @@ struct JournalListView: View {
                     
 
                 }
+                NavigationLink("Add Template", destination: CreateTemplateView())
                 Spacer()
                 Button("degug_add_default", action: createEntry)
                 Divider()

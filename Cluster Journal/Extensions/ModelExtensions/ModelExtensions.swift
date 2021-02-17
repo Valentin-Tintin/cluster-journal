@@ -41,6 +41,12 @@ extension SuperJournalEntry {
 }
 
 extension Template {
+    func addSection(section: EntryAtributeSection){
+        var old = self.sections
+        old.insert(section)
+    }
+    
+    
     var sections: Set<EntryAtributeSection> {
         get {
             if (self.sections_ == nil) {
