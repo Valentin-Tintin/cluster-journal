@@ -11,6 +11,9 @@ struct EntryOverview: View {
     @ObservedObject var entry: TopLevelEntry
     
     var body: some View {
+        NavigationLink(destination: EntryDetailView(entry: entry)){
+            
+        
         HStack(alignment: VerticalAlignment.center, spacing: 20) {
             Image(systemName: entry.type?.icon ?? "").foregroundColor(.orange)
             VStack(alignment: HorizontalAlignment.leading, spacing: 5 ) {
@@ -22,6 +25,7 @@ struct EntryOverview: View {
                 }
                 
         }
+    }
        
        
     }
