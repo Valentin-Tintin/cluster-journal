@@ -49,34 +49,63 @@ struct JournalListView: View {
     
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var templates: FetchedResults<Template>
     
+    
+    
     var body: some View {
         NavigationView {
-            VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
-               
-                ForEach(entries) { entry in
-                    EntryOverview(entry: entry)
-                    //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
-                }
-                ForEach(templates) { template in
-                    NavigationLink(destination: CreateFromTemplateView(template: template)){
-                        Text( "Create \(template.name ?? "No name found")")
+            GeometryReader {
+                reader in
+                VStack(alignment: HorizontalAlignment.leading, spacing: 30) {
+                   
+                    ForEach(entries) { entry in
+                        EntryOverview(entry: entry)
+                        //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
+                    }
+                    let width = (reader.size.height / 3) / 3
+                    let height = 100
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: HorizontalAlignment.leading){
+                        
+                        ForEach(templates) { template in
+                            
+                                NavigationLink(destination: CreateFromTemplateView(template: template)){
+                                    HStack(alignment: VerticalAlignment.center) {
+                                        VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
+                                            Image(systemName: template.type?.icon ?? "")
+                                                .foregroundColor(Color.orange)
+                                            Text( template.name ?? "No name found")
+                                                .lineLimit(1)
+                                                .foregroundColor(Color.black)
+                                        }
+                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                                        .padding()
+                                        VStack(alignment: HorizontalAlignment.trailing) {
+                                            Image(systemName: "plus.circle")
+                                                .foregroundColor(Color.black)
+                                        }.padding()
+                                        
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                                    .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.white))
+                                    .compositingGroup()
+                                    .shadow(color: Color.gray, radius: 1)
+                                }
+                            
+                        
+                        }
+                        
+                        
                     }
                     
-
-                }
-                
-                
-                    NavigationLink(destination: CreateNamedTemplateView()){
-                        Text( "Create New Template")
-                    }
+                        NavigationLink(destination: CreateNamedTemplateView()){
+                            Text(  "Create New Template")
+                        }
+                        
                     
                 
-                Spacer()
-                Button("degug_add_default", action: createEntry)
-                Divider()
-                Button("degug_add_öpnv", action: createPublicTransportEntry)
-               
-            }.padding()
+                   
+                }.padding()
+            }
+            
             
         }
         
