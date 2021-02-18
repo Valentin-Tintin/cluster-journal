@@ -44,6 +44,14 @@ struct CreateFromTemplateView: View {
             }
             Button("Save", action: saveState)
         }.onAppear(perform: createEmptyEntryFromTemplate)
+        .onDisappear(perform: removeItem)
+        
+    }
+    
+    func removeItem() {
+        if(self.entry != nil){
+            viewContext.delete(self.entry!)
+        }
         
     }
     
