@@ -120,6 +120,15 @@ extension TopLevelEntry {
         return newEntry
     }
     
+    var timestamp: Date {
+        get {
+           return self.timestamp_ ?? Date()
+        }
+        set {
+            self.timestamp_ = newValue
+        }
+    }
+    
     var sections: Set<EntryAtributeSection> {
         get {
             var test = self.sections_

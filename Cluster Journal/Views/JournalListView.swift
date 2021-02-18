@@ -37,6 +37,8 @@ struct CreateNamedTemplateView: View {
     
     func initData(){
         self.templ = TemplateType(context: viewContext)
+        self.templ?.color = "orange"
+        self.templ?.icon = "person.3"
     }
 }
 
@@ -52,7 +54,7 @@ struct JournalListView: View {
             VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
                
                 ForEach(entries) { entry in
-                    TopLevelEntryView(entry: entry)
+                    EntryOverview(entry: entry)
                     //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
                 }
                 ForEach(templates) { template in

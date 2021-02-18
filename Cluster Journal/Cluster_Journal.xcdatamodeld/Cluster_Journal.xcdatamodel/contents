@@ -49,6 +49,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="TopLevelEntry" representedClassName="TopLevelEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="sections_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="EntryAtributeSection"/>
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryType"/>
     </entity>
@@ -58,11 +59,11 @@
         <element name="Entity" positionX="-1308.47265625" positionY="-161.2421875" width="128" height="43"/>
         <element name="EntryAtributeSection" positionX="-1053.640625" positionY="-134.5" width="128" height="73"/>
         <element name="EntryAttribute" positionX="-1112.91796875" positionY="20.546875" width="128" height="148"/>
+        <element name="EntryType" positionX="-1161" positionY="-279" width="128" height="103"/>
         <element name="PublicTransportJournalEntry" positionX="-261" positionY="-117" width="128" height="43"/>
         <element name="SuperJournalEntry" positionX="-281.53515625" positionY="-38.2890625" width="128" height="103"/>
         <element name="Template" positionX="-939.171875" positionY="-269.2578125" width="128" height="103"/>
         <element name="TemplateType" positionX="-725.06640625" positionY="-34.3671875" width="128" height="103"/>
-        <element name="TopLevelEntry" positionX="-1152.47265625" positionY="-424.3203125" width="107.96875" height="73"/>
-        <element name="EntryType" positionX="-1161" positionY="-279" width="128" height="103"/>
+        <element name="TopLevelEntry" positionX="-1152.88671875" positionY="-420.6953125" width="107.96875" height="88"/>
     </elements>
 </model>

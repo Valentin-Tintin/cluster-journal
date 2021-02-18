@@ -11,19 +11,14 @@ import Combine
 
 struct CreateFromTemplateView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
+
     var template: Template
     
     @State var entry: TopLevelEntry?
     
     init(template: Template) {
-        print("#######init-START######")
-        template.sections.map() {
-            $0.attributes.map(){
-                print($0.name)
-            }
-        }
-        print(template.name)
-        print("#######init-END######")
+       
         self.template = template
         self._entry = State(wrappedValue: nil)
     }
@@ -31,8 +26,11 @@ struct CreateFromTemplateView: View {
     var body: some View {
         
         Form {
-            Text("Create new \(template.name ?? "No name found")")
+            Text("Create new \(entry?.type?.name ?? "No name found")")
             let  sections = entry?.sections ?? []
+            Section(header: Text("Standard")){
+                DatePicker("Zeitpunkt", selection: Binding(get: {self.entry?.timestamp ?? Date()}, set: {self.entry?.timestamp = $0}))
+            }
             ForEach(Array(sections)) { section in
                 Section(header: Text(section.name ?? "Kein Name angegeben")) {
                     ForEach(Array(section.attributes)){ attr in
@@ -51,7 +49,7 @@ struct CreateFromTemplateView: View {
     
     func createEmptyEntryFromTemplate() {
         print("Sections from templ")
-        print(self.template.sections)
+        print(self.template.type?.name)
         self.entry = TopLevelEntry.fromTemplate(template: self.template, context: viewContext)
     }
     
@@ -62,6 +60,7 @@ struct CreateFromTemplateView: View {
             }
         }
         try? viewContext.save()
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

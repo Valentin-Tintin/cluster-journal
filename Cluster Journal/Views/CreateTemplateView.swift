@@ -45,10 +45,16 @@ struct CreateTemplateView: View {
         })
         
     }
-    
+        
     var body: some View {
         Text(templateType.name ?? "No Name")
         Form {
+            Section(header: Text("Standard")){
+                HStack(alignment: VerticalAlignment.center) {
+                    Text("Zeitpunkt")
+                    Text("Date").foregroundColor(.gray)
+                }
+            }
             ForEach(Array(sections.map(){
                 return ($0.key, $0.value)
             }), id: \.0) { section in
@@ -90,6 +96,7 @@ struct CreateTemplateView: View {
     }
     
     func saveTemplate(){
+        self.newTemplate?.type = self.templateType
         self.newTemplate?.sections = Set(self.sections.values)
         try? viewContext.save()
         self.presentationMode.wrappedValue.dismiss()
