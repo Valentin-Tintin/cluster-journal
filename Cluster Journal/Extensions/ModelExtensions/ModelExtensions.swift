@@ -112,13 +112,19 @@ extension TopLevelEntry {
         }
         
         print("Names: \(attrNames)")
-        newEntry.sections = template.sections
+        template.sections.map(){
+            newEntry.addToSections_(copySectionByValue(section: $0, context: context))
+        }
+        
+        //newEntry.sections = template.sections
         if(template.type != nil){
             newEntry.type = EntryType.fromTemplateType(templateType: template.type!, context: context)
 
         }
         return newEntry
     }
+    
+    
     
     var timestamp: Date {
         get {
@@ -142,6 +148,26 @@ extension TopLevelEntry {
             self.sections_ = newValue as NSSet
         }
     }
+}
+
+private func copySectionByValue(section: EntryAtributeSection, context: NSManagedObjectContext) -> EntryAtributeSection {
+    let newSection = EntryAtributeSection(context: context)
+    newSection.name = section.name
+    section.attributes.map(){
+        newSection.addToAttributes_(copyAttributeByValue(atrr: $0, context: context))
+    }
+    return newSection
+}
+
+private func copyAttributeByValue(atrr: EntryAttribute, context: NSManagedObjectContext) -> EntryAttribute{
+    let newAttr = EntryAttribute(context: context)
+    newAttr.name = atrr.name
+    newAttr.type = atrr.type
+    newAttr.boolValue = atrr.boolValue
+    newAttr.dateValue = atrr.dateValue
+    newAttr.numericValue = atrr.numericValue
+    newAttr.stringValue = atrr.stringValue
+    return newAttr
 }
 
 extension EntryType {

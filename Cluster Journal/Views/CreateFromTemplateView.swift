@@ -60,6 +60,7 @@ struct CreateFromTemplateView: View {
             }
         }
         try? viewContext.save()
+        self.entry = nil
         presentationMode.wrappedValue.dismiss()
     }
 }
