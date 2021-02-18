@@ -14,13 +14,38 @@ struct TopLevelEntryView: View {
     }
 }
 
+struct CreateNamedTemplateView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
+    @State var creationFinished: Bool = false
+    @State var name: String = ""
+    @State var templ : TemplateType?
+    var body: some View {
+        TextField("Name", text: Binding(get: {templ?.name ?? ""}, set: {self.templ?.name = $0 }))
+            .onAppear(perform: initData)
+        NavigationLink("Add Template", destination: CreateTemplateView(templ: self.templ ?? TemplateType(), finished: $creationFinished))
+            .onChange(of: creationFinished, perform: maybeDismissView)
+        
+    }
+    
+    func maybeDismissView(val: Bool){
+        if(self.creationFinished){
+            presentationMode.wrappedValue.dismiss()
+        }
+        
+    }
+    
+    func initData(){
+        self.templ = TemplateType(context: viewContext)
+    }
+}
+
 struct JournalListView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var entries: FetchedResults<TopLevelEntry>
     
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var templates: FetchedResults<Template>
-    
     
     var body: some View {
         NavigationView {
@@ -37,7 +62,13 @@ struct JournalListView: View {
                     
 
                 }
-                NavigationLink("Add Template", destination: CreateTemplateView())
+                
+                
+                    NavigationLink(destination: CreateNamedTemplateView()){
+                        Text( "Create New Template")
+                    }
+                    
+                
                 Spacer()
                 Button("degug_add_default", action: createEntry)
                 Divider()

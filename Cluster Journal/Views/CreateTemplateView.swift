@@ -26,16 +26,19 @@ struct AddSectionView: View {
 }
 
 struct CreateTemplateView: View {
-    var templateType: TemplateType?
+    var templateType: TemplateType
+
     @Environment(\.managedObjectContext) private var viewContext
     @Environment(\.presentationMode) var presentationMode
     @State var newTemplate: Template?
     @State var sections: Dictionary<String,EntryAtributeSection> = Dictionary<String,EntryAtributeSection>()
     @State var addSectionViewOpen: Bool = false
+    @Binding var finished: Bool
     
     
-    init() {
-        self.templateType = nil
+    init(templ: TemplateType, finished: Binding<Bool> ) {
+        self._finished = finished
+        self.templateType = templ
         self._newTemplate = State(initialValue: nil)
         var arr = Array(sections.map(){
             return ($0.key, $0.value)
@@ -44,7 +47,7 @@ struct CreateTemplateView: View {
     }
     
     var body: some View {
-        Text(templateType?.name ?? "No Name")
+        Text(templateType.name ?? "No Name")
         Form {
             ForEach(Array(sections.map(){
                 return ($0.key, $0.value)
@@ -82,14 +85,16 @@ struct CreateTemplateView: View {
     
     func initTemplate() {
         var templ = Template(context: viewContext)
-        templ.name = templateType?.name ?? "Mein Test Name"
+        templ.name = templateType.name ?? "Mein Test Name"
         self.newTemplate = templ
     }
     
     func saveTemplate(){
         self.newTemplate?.sections = Set(self.sections.values)
         try? viewContext.save()
-        presentationMode.wrappedValue.dismiss()
+        self.presentationMode.wrappedValue.dismiss()
+        self.finished = true
+        
     }
     func openAddSectionView(){
         self.addSectionViewOpen = true
