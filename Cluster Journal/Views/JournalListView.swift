@@ -92,13 +92,35 @@ struct JournalListView: View {
                             
                         
                         }
+                        NavigationLink(destination: CreateNamedTemplateView()){
+                            HStack(alignment: VerticalAlignment.center) {
+                            VStack(alignment: HorizontalAlignment.leading) {
+                               
+                                    Text("Eigene Vorlage erstellen")
+                                        .font(.callout)
+                                        .foregroundColor(Color.black)
+                                        .lineLimit(2)
+                                   
+                                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                                VStack(alignment: HorizontalAlignment.trailing){
+                                    Image(systemName: "plus.circle")
+                                        .foregroundColor(Color.black)
+                                }
+                            }
+                        .padding()
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.white))
+                        .compositingGroup()
+                        .shadow(color: Color.gray, radius: 1)
+                            
+                        }
                         
                         
                     }
                     
-                        NavigationLink(destination: CreateNamedTemplateView()){
-                            Text(  "Create New Template")
-                        }
+                        
+                          
+                        
                         
                     
                 
