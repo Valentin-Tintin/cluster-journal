@@ -28,22 +28,29 @@ struct AddSectionView: View {
 struct CreateTemplateView: View {
     var templateType: TemplateType?
     @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.presentationMode) var presentationMode
     @State var newTemplate: Template?
-    @State var sections: Set<EntryAtributeSection> = Set<EntryAtributeSection>()
+    @State var sections: Dictionary<String,EntryAtributeSection> = Dictionary<String,EntryAtributeSection>()
     @State var addSectionViewOpen: Bool = false
     
     
     init() {
         self.templateType = nil
         self._newTemplate = State(initialValue: nil)
+        var arr = Array(sections.map(){
+            return ($0.key, $0.value)
+        })
+        
     }
     
     var body: some View {
         Text(templateType?.name ?? "No Name")
         Form {
-            ForEach(Array(sections)) { section in
-                Section(header: Text(section.name ?? "")){
-                    EntryAttributesView(attributes: section.attributes)
+            ForEach(Array(sections.map(){
+                return ($0.key, $0.value)
+            }), id: \.0) { section in
+                Section(header: Text(section.1.name ?? "")){
+                    EntryAttributesView(sectionName: section.0, saveAttrToSection: addAttrToSection,attributes: section.1.attributes)
                 }
             }
         }
@@ -53,6 +60,23 @@ struct CreateTemplateView: View {
         }
         Button("Add Section", action: openAddSectionView)
             .onAppear(perform: initTemplate)
+        Button("Save", action: saveTemplate)
+    }
+    
+    func addAttrToSection(sectionKEy: String, attr: EntryAttribute){
+        var exsistingSection = self.sections[sectionKEy]
+        if(exsistingSection == nil){
+            //ignore
+        } else {
+            var existingAttributes = exsistingSection?.attributes
+            
+                exsistingSection?.addToAttributes_(attr)
+                self.sections.updateValue(exsistingSection!, forKey: sectionKEy)
+                
+            
+        }
+        
+        
     }
     
     
@@ -63,19 +87,24 @@ struct CreateTemplateView: View {
     }
     
     func saveTemplate(){
+        self.newTemplate?.sections = Set(self.sections.values)
         try? viewContext.save()
+        presentationMode.wrappedValue.dismiss()
     }
     func openAddSectionView(){
         self.addSectionViewOpen = true
     }
     
     func addSection(section : EntryAtributeSection) -> Void {
-            self.sections.insert(section)
+        
+        self.sections.updateValue(section, forKey: section.name!)
         addSectionViewOpen.toggle()
     }
 }
 
 struct EntryAttributesView: View {
+    let sectionName: String
+    var saveAttrToSection : (_ : String, _: EntryAttribute) -> Void
     @Environment(\.managedObjectContext) private var viewContext
     @State var attributes: Set<EntryAttribute>
     @State var isAddAttributeViewOpen: Bool = false
@@ -100,6 +129,7 @@ struct EntryAttributesView: View {
     
     func saveAttr(attr: EntryAttribute) {
         attributes.insert(attr)
+        saveAttrToSection(sectionName, attr)
         isAddAttributeViewOpen.toggle()
     }
     

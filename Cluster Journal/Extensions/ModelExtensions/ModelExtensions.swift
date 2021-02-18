@@ -101,8 +101,17 @@ extension TopLevelEntry {
     static func fromTemplate(template: Template,  context: NSManagedObjectContext) -> TopLevelEntry {
         
         let newEntry = TopLevelEntry(context: context)
-        //print(newEntry.sections)
-        //print(template.sections)
+        print(newEntry.sections)
+        var sections = template.sections
+        var attrNames: [String] = []
+        template.sections.map(){
+            $0.attributes.map(){
+                attrNames.append($0.name ?? "")
+                print($0.name)
+            }
+        }
+        
+        print("Names: \(attrNames)")
         newEntry.sections = template.sections
         if(template.type != nil){
             newEntry.type = EntryType.fromTemplateType(templateType: template.type!, context: context)
