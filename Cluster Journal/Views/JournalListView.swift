@@ -60,23 +60,38 @@ struct JournalListView: View {
     
     
     var body: some View {
-        NavigationView {
-            GeometryReader {
-                reader in
-                VStack(alignment: HorizontalAlignment.leading, spacing: 30) {
+        
+            
+            NavigationView {
+                ZStack {
+                    Color("BackgroundColor")
+                        .ignoresSafeArea()
+                GeometryReader {
+                    reader in
                     VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
-                        ForEach(entries) { entry in
-                            EntryOverview(entry: entry)
-                            //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
-                        }
-                        NavigationLink(destination: CompleteJournalView()){
-                            Text("Alle anzeigen")
-                        }
-                    }
-                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: HorizontalAlignment.leading){
-                        
-                        ForEach(templates) { template in
+                        Text("Einträge").font(.headline)
+                        VStack(alignment: HorizontalAlignment.leading, spacing: 10){
                             
+                            ForEach(entries) { entry in
+                                EntryOverview(entry: entry)
+                                Divider()
+                                //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
+                            }.padding(.horizontal)
+                            NavigationLink(destination: CompleteJournalView()){
+                                Text("Alle anzeigen")
+                            }.padding(.horizontal)
+                        }
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(Color.white))
+                        
+                        Text("Vorlagen").font(.headline)
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: HorizontalAlignment.leading){
+                            
+                            ForEach(templates) { template in
+                                
                                 NavigationLink(destination: CreateFromTemplateView(template: template)){
                                     HStack(alignment: VerticalAlignment.center) {
                                         VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
@@ -99,34 +114,34 @@ struct JournalListView: View {
                                     .compositingGroup()
                                     .shadow(color: Color.gray, radius: 1)
                                 }
-                        }
-                        NavigationLink(destination: CreateNamedTemplateView()){
-                            HStack(alignment: VerticalAlignment.center) {
-                            VStack(alignment: HorizontalAlignment.leading) {
-                               
-                                    Text("Eigene Vorlage erstellen")
-                                        .font(.callout)
-                                        .foregroundColor(Color.black)
-                                        .lineLimit(2)
-                                   
-                                }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                                VStack(alignment: HorizontalAlignment.trailing){
-                                    Image(systemName: "plus.circle")
-                                        .foregroundColor(Color.black)
-                                }
                             }
-                        .padding()
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                        .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.white))
-                        .compositingGroup()
-                        .shadow(color: Color.gray, radius: 1)
-                            
+                            NavigationLink(destination: CreateNamedTemplateView()){
+                                HStack(alignment: VerticalAlignment.center) {
+                                    VStack(alignment: HorizontalAlignment.leading) {
+                                        
+                                        Text("Eigene Vorlage erstellen")
+                                            .font(.callout)
+                                            .foregroundColor(Color.black)
+                                            .lineLimit(2)
+                                        
+                                    }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                                    VStack(alignment: HorizontalAlignment.trailing){
+                                        Image(systemName: "plus.circle")
+                                            .foregroundColor(Color.black)
+                                    }
+                                }
+                                .padding()
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                                .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.white))
+                                .compositingGroup()
+                                .shadow(color: Color.gray, radius: 1)
+                                
+                            }
                         }
-                    }
-                }.padding()
-                Spacer()
-            }
-        }
+                    }.padding(.horizontal)
+                    Spacer()
+                }.navigationBarTitle(Text("Home"))
+            }}
     }
     
     private func createEntryFromTemplate(template: Template) -> () -> () {
@@ -144,7 +159,7 @@ struct JournalListView: View {
     private func createEntry() {
         let newItem = DefaultJournalEntry(context: viewContext)
         newItem.typeDiscriminator = .Default
-
+        
         newItem.id = UUID()
         newItem.notes = "DefaultJournal Entry"
         newItem.mask = true
@@ -170,9 +185,9 @@ struct JournalListView: View {
 }
 
 /*
-struct JournalListView_Previews: PreviewProvider {
-    static var previews: some View {
-        JournalListView()
-    }
-}
+ struct JournalListView_Previews: PreviewProvider {
+ static var previews: some View {
+ JournalListView()
+ }
+ }
  */
