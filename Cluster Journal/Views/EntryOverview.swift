@@ -13,22 +13,26 @@ struct EntryOverview: View {
     var body: some View {
         NavigationLink(destination: EntryDetailView(entry: entry)){
             
-        
+            
             HStack(alignment: VerticalAlignment.center, spacing: 20) {
-            Image(systemName: entry.type?.icon ?? "").foregroundColor(.orange)
-            VStack(alignment: HorizontalAlignment.leading, spacing: 5 ) {
-                   
-                Text(entry.type?.name ?? "").font(.caption).foregroundColor(.black)
-                Text(entry.timestamp.toString()).font(.caption).foregroundColor(.black)
+                Image(systemName: entry.type?.icon ?? "")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 24)
+                    .foregroundColor(Color.fromString(str: entry.type?.color ?? ""))
+                VStack(alignment: HorizontalAlignment.leading, spacing: 5 ) {
                     
-                    }
+                    Text(entry.type?.name ?? "").font(.caption).foregroundColor(.black)
+                    Text(entry.timestamp.toString()).font(.caption).foregroundColor(.black)
+                    
                 }
-                
+            }
+            
         }
     }
-       
-       
-    }
+    
+    
+}
 
 
 

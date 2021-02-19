@@ -38,8 +38,26 @@ struct CreateNamedTemplateView: View {
     
     func initData(){
         self.templ = TemplateType(context: viewContext)
-        self.templ?.color = "orange"
-        self.templ?.icon = "person.3"
+        self.templ?.color = getRandomColor()
+        self.templ?.icon = getSemiRandomIcon()
+    }
+    
+    // THIS VODOO Should be replaced by picker
+    
+    func getRandomColor() -> String {
+        let colors = ["orange","blue","green","red","yellow","purple"]
+        return colors[Int.random(in: 0 ..< colors.count)]
+    }
+    
+    func getSemiRandomIcon() -> String {
+        if(self.name == "ÖPNV"){
+            return "tram"
+        }
+        if(self.name == "Einkaufen"){
+            return "cart"
+        }
+        let icons = ["person.3","cart", "car", "tram", "airplane", "bubble.left.and.bubble.right", "heart.text.square"]
+        return icons[Int.random(in: 0 ..< icons.count)]
     }
 }
 
@@ -96,7 +114,7 @@ struct JournalListView: View {
                                     HStack(alignment: VerticalAlignment.center) {
                                         VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
                                             Image(systemName: template.type?.icon ?? "")
-                                                .foregroundColor(Color.orange)
+                                                .foregroundColor(Color.fromString(str: template.type?.color ?? ""))
                                             Text( template.name ?? "No name found")
                                                 .lineLimit(1)
                                                 .foregroundColor(Color.black)
@@ -112,7 +130,7 @@ struct JournalListView: View {
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                                     .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.white))
                                     .compositingGroup()
-                                    .shadow(color: Color.gray, radius: 1)
+                                    //.shadow(color: Color.gray, radius: 1)
                                 }
                             }
                             NavigationLink(destination: CreateNamedTemplateView()){
