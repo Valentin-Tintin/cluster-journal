@@ -28,7 +28,6 @@ struct Cluster_JournalApp: App {
         let res = try? context.fetch(req)
         
         if(res?.isEmpty ?? true ){
-            print(res?.count)
             print("Creating Default Template")
             let defaultTemplateType = createDefaultTemplate(context: context)
             
@@ -37,21 +36,28 @@ struct Cluster_JournalApp: App {
             section.name = "Standard"
             
             let ortAttribut = EntryAttribute(context: context)
-            ortAttribut.name = "Datum"
-            ortAttribut.type = .Date
+            ortAttribut.name = "Ort"
+            ortAttribut.type = .String
+            
+            let maskenAttribut = EntryAttribute(context: context)
+            maskenAttribut.name = "Masken"
+            maskenAttribut.type = .Boolean
 
-            let set = Set<EntryAttribute>([ortAttribut])
+            let set = Set<EntryAttribute>([ortAttribut,maskenAttribut])
             
             
             
             section.attributes = set
             
             let templ = Template(context: context)
-            templ.name = "Default"
+            templ.name = "Standard"
             templ.type = defaultTemplateType
             let sections = Set<EntryAtributeSection>([section])
             templ.sections = sections
             templ.isDefault = true
+            
+            createopnvTemplate(context: context)
+            
             
             do {
                try context.save()
@@ -61,6 +67,55 @@ struct Cluster_JournalApp: App {
             
         }
         
+    }
+    
+    private func createopnvTemplate(context: NSManagedObjectContext) -> Template {
+        let opnvTemplType = TemplateType(context: context)
+        opnvTemplType.isDefault = true
+        opnvTemplType.name = "ÖPNV"
+        opnvTemplType.color = "blue"
+        opnvTemplType.icon = "tram"
+        
+        let section = EntryAtributeSection(context: context)
+        
+        section.name = "Standard"
+        
+        let ortAttribut = EntryAttribute(context: context)
+        ortAttribut.name = "Einstieg"
+        ortAttribut.type = .String
+        
+        let maskenAttribut = EntryAttribute(context: context)
+        maskenAttribut.name = "Masken"
+        maskenAttribut.type = .Boolean
+        
+        let linieAttribut = EntryAttribute(context: context)
+        linieAttribut.name = "Linie"
+        linieAttribut.type = .String
+        
+        
+
+        let set = Set<EntryAttribute>([ortAttribut,linieAttribut,maskenAttribut])
+        
+        let extrasection = EntryAtributeSection(context: context)
+        
+        let personenAttribut = EntryAttribute(context: context)
+        personenAttribut.name = "Anzahl Personen"
+        personenAttribut.type = .Numeric
+        
+        extrasection.name = "Extras"
+        
+        extrasection.attributes = Set([personenAttribut])
+        
+        section.attributes = set
+        
+        let templ = Template(context: context)
+        templ.name = "ÖPNV"
+        templ.type = opnvTemplType
+        let sections = Set<EntryAtributeSection>([section, extrasection])
+        templ.sections = sections
+        templ.isDefault = true
+        
+        return templ
     }
     
     private func createDefaultTemplate(context: NSManagedObjectContext) -> TemplateType {
