@@ -14,7 +14,7 @@ struct EntryOverview: View {
         NavigationLink(destination: EntryDetailView(entry: entry)){
             
         
-        HStack(alignment: VerticalAlignment.center, spacing: 20) {
+            HStack(alignment: VerticalAlignment.center, spacing: 20) {
             Image(systemName: entry.type?.icon ?? "").foregroundColor(.orange)
             VStack(alignment: HorizontalAlignment.leading, spacing: 5 ) {
                    

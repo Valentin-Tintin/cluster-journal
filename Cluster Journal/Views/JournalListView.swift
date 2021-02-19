@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TopLevelEntryView: View {
     var entry: TopLevelEntry
@@ -49,6 +50,13 @@ struct JournalListView: View {
     
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var templates: FetchedResults<Template>
     
+    init() {
+        let request: NSFetchRequest<TopLevelEntry> = NSFetchRequest(entityName: "TopLevelEntry")
+        request.fetchLimit = 3
+        request.predicate = NSPredicate.all
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \TopLevelEntry.timestamp_, ascending: false)]
+        self._entries = FetchRequest<TopLevelEntry>(fetchRequest: request)
+    }
     
     
     var body: some View {
@@ -56,13 +64,15 @@ struct JournalListView: View {
             GeometryReader {
                 reader in
                 VStack(alignment: HorizontalAlignment.leading, spacing: 30) {
-                   
-                    ForEach(entries) { entry in
-                        EntryOverview(entry: entry)
-                        //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
+                    VStack(alignment: HorizontalAlignment.leading, spacing: 10) {
+                        ForEach(entries) { entry in
+                            EntryOverview(entry: entry)
+                            //JournalListItemView(entry: entry).environment(\.managedObjectContext, viewContext)
+                        }
+                        NavigationLink(destination: CompleteJournalView()){
+                            Text("Alle anzeigen")
+                        }
                     }
-                    let width = (reader.size.height / 3) / 3
-                    let height = 100
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], alignment: HorizontalAlignment.leading){
                         
                         ForEach(templates) { template in
@@ -89,8 +99,6 @@ struct JournalListView: View {
                                     .compositingGroup()
                                     .shadow(color: Color.gray, radius: 1)
                                 }
-                            
-                        
                         }
                         NavigationLink(destination: CreateNamedTemplateView()){
                             HStack(alignment: VerticalAlignment.center) {
@@ -114,23 +122,11 @@ struct JournalListView: View {
                         .shadow(color: Color.gray, radius: 1)
                             
                         }
-                        
-                        
                     }
-                    
-                        
-                          
-                        
-                        
-                    
-                
-                   
                 }.padding()
+                Spacer()
             }
-            
-            
         }
-        
     }
     
     private func createEntryFromTemplate(template: Template) -> () -> () {
