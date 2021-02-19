@@ -25,11 +25,7 @@ struct CreateNamedTemplateView: View {
         Form {
             TextField("Name", text: Binding(get: {templ?.name ?? ""}, set: {self.templ?.name = $0 }))
                 .onAppear(perform: initData)
-            NavigationLink(destination: CreateTemplateView(templ: self.templ ?? TemplateType(), finished: $creationFinished)) {
-                Button(action: {}){
-                    Text("Erstellen")
-                }
-            }
+            NavigationLink("Erstellen", destination: CreateTemplateView(templ: self.templ ?? TemplateType(), finished: $creationFinished))
                 .onChange(of: creationFinished, perform: maybeDismissView)
             
         }.navigationBarTitle(Text("Vorlage erstellen"))
@@ -73,7 +69,7 @@ struct JournalListView: View {
     
     @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var entries: FetchedResults<TopLevelEntry>
     
-    @FetchRequest(sortDescriptors: [], predicate: NSPredicate.all) var templates: FetchedResults<Template>
+    @FetchRequest(sortDescriptors: [], predicate: NSPredicate(format: "type != nil")) var templates: FetchedResults<Template>
     
     init() {
         let request: NSFetchRequest<TopLevelEntry> = NSFetchRequest(entityName: "TopLevelEntry")

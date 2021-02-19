@@ -69,12 +69,13 @@ struct CreateTemplateView: View {
                 .onAppear(perform: initTemplate)
             Button("Save", action: saveTemplate)
         }
+        .navigationBarTitle(Text(templateType.name ?? "No Name"))
         
         .sheet(isPresented: self.$addSectionViewOpen) {
             AddSectionView(saveSection: addSection)
         }
         
-            .navigationBarTitle(Text(templateType.name ?? "No Name"))
+           
     }
     
     func addAttrToSection(sectionKEy: String, attr: EntryAttribute){
@@ -101,11 +102,13 @@ struct CreateTemplateView: View {
     }
     
     func saveTemplate(){
+        print("saving Template")
         self.newTemplate?.type = self.templateType
         self.newTemplate?.sections = Set(self.sections.values)
-        try? viewContext.save()
         self.presentationMode.wrappedValue.dismiss()
         self.finished = true
+        try? viewContext.save()
+        
         
     }
     func openAddSectionView(){
