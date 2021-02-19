@@ -12,8 +12,11 @@ struct AddSectionView: View {
     var saveSection: (_: EntryAtributeSection) -> Void;
     @State var name: String = ""
     var body: some View {
-        TextField("Name", text: self.$name)
-        Button("Save", action: save)
+        Form {
+            TextField("Name", text: self.$name)
+            Button("Save", action: save)
+        }
+        
     }
     
     func save() {
@@ -47,7 +50,7 @@ struct CreateTemplateView: View {
     }
         
     var body: some View {
-        Text(templateType.name ?? "No Name")
+        
         Form {
             Section(header: Text("Standard")){
                 HStack(alignment: VerticalAlignment.center) {
@@ -58,18 +61,20 @@ struct CreateTemplateView: View {
             ForEach(Array(sections.map(){
                 return ($0.key, $0.value)
             }), id: \.0) { section in
-                Section(header: Text(section.1.name ?? "")){
+               
                     EntryAttributesView(sectionName: section.0, saveAttrToSection: addAttrToSection,attributes: section.1.attributes)
                 }
-            }
+            
+            Button("Add Section", action: openAddSectionView)
+                .onAppear(perform: initTemplate)
+            Button("Save", action: saveTemplate)
         }
         
         .sheet(isPresented: self.$addSectionViewOpen) {
             AddSectionView(saveSection: addSection)
         }
-        Button("Add Section", action: openAddSectionView)
-            .onAppear(perform: initTemplate)
-        Button("Save", action: saveTemplate)
+        
+            .navigationBarTitle(Text(templateType.name ?? "No Name"))
     }
     
     func addAttrToSection(sectionKEy: String, attr: EntryAttribute){
@@ -123,20 +128,22 @@ struct EntryAttributesView: View {
     @State var name: String = ""
     var body: some View {
                
+        Section(header: Text(sectionName)){
         
         ForEach(Array(attributes)) { attribute in
             HStack(alignment: VerticalAlignment.center) {
                 Text(attribute.name ?? "")
                 Text(attribute.type.rawValue).foregroundColor(.gray)
             }
-            
         }
         
-        .sheet(isPresented: $isAddAttributeViewOpen) {
-            CreateAttrView(saveAttr: saveAttr) .environment(\.managedObjectContext, viewContext)
-            
-        }
+        
         Button("Add Attribute", action: handleAddAttr)
+            .sheet(isPresented: $isAddAttributeViewOpen) {
+                CreateAttrView(saveAttr: saveAttr) .environment(\.managedObjectContext, viewContext)
+                
+            }
+        }
     }
     
     func saveAttr(attr: EntryAttribute) {

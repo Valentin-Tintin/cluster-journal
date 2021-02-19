@@ -22,10 +22,17 @@ struct CreateNamedTemplateView: View {
     @State var name: String = ""
     @State var templ : TemplateType?
     var body: some View {
-        TextField("Name", text: Binding(get: {templ?.name ?? ""}, set: {self.templ?.name = $0 }))
-            .onAppear(perform: initData)
-        NavigationLink("Add Template", destination: CreateTemplateView(templ: self.templ ?? TemplateType(), finished: $creationFinished))
-            .onChange(of: creationFinished, perform: maybeDismissView)
+        Form {
+            TextField("Name", text: Binding(get: {templ?.name ?? ""}, set: {self.templ?.name = $0 }))
+                .onAppear(perform: initData)
+            NavigationLink(destination: CreateTemplateView(templ: self.templ ?? TemplateType(), finished: $creationFinished)) {
+                Button(action: {}){
+                    Text("Erstellen")
+                }
+            }
+                .onChange(of: creationFinished, perform: maybeDismissView)
+            
+        }.navigationBarTitle(Text("Vorlage erstellen"))
         
     }
     
