@@ -152,7 +152,7 @@ struct JournalListView: View {
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                                 .background(RoundedRectangle(cornerRadius: 10).foregroundColor(Color.white))
                                 .compositingGroup()
-                                .shadow(color: Color.gray, radius: 1)
+                                //.shadow(color: Color.gray, radius: 1)
                                 
                             }
                         }
