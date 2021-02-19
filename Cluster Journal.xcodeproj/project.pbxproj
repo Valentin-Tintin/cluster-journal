@@ -20,13 +20,9 @@
 		A1D0C868258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C866258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld */; };
 		A1D0C873258BAE8D009C5C51 /* Cluster_JournalTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C872258BAE8D009C5C51 /* Cluster_JournalTests.swift */; };
 		A1D0C87E258BAE8D009C5C51 /* Cluster_JournalUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C87D258BAE8D009C5C51 /* Cluster_JournalUITests.swift */; };
-		A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */; };
 		A1D40F2225CF1EC9002DF3C8 /* JournalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */; };
 		A1D40F2825CF206A002DF3C8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F2725CF206A002DF3C8 /* Extensions.swift */; };
-		A1D40F3125D011A7002DF3C8 /* JournalListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */; };
 		A1D40F3725D0308D002DF3C8 /* ModelExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */; };
-		A1D40F4725D054A8002DF3C8 /* PublicTransportJournalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */; };
-		A1D40F4C25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1D40F4B25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,13 +62,9 @@
 		A1D0C879258BAE8D009C5C51 /* Cluster JournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Cluster JournalUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1D0C87D258BAE8D009C5C51 /* Cluster_JournalUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cluster_JournalUITests.swift; sourceTree = "<group>"; };
 		A1D0C87F258BAE8D009C5C51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbuchEntryView.swift; sourceTree = "<group>"; };
 		A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListView.swift; sourceTree = "<group>"; };
 		A1D40F2725CF206A002DF3C8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalListItemView.swift; sourceTree = "<group>"; };
 		A1D40F3625D0308D002DF3C8 /* ModelExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelExtensions.swift; sourceTree = "<group>"; };
-		A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicTransportJournalDetailView.swift; sourceTree = "<group>"; };
-		A1D40F4B25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDefaultJournalEntryForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,11 +158,7 @@
 		A1D0C88E258BB463009C5C51 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A1D0C88F258BB598009C5C51 /* LogbuchEntryView.swift */,
 				A1D40F2125CF1EC9002DF3C8 /* JournalListView.swift */,
-				A1D40F3025D011A7002DF3C8 /* JournalListItemView.swift */,
-				A1D40F4625D054A8002DF3C8 /* PublicTransportJournalDetailView.swift */,
-				A1D40F4B25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift */,
 				A1C23CED25DAB90600BC184B /* CreateFromTemplateView.swift */,
 				A14D769C25DD78460022DB45 /* CreateTemplateView.swift */,
 				A183029E25DE9E2900C54D56 /* EntryOverview.swift */,
@@ -338,13 +326,9 @@
 				A1D0C868258BAE8D009C5C51 /* Cluster_Journal.xcdatamodeld in Sources */,
 				A18302A925E02D9A00C54D56 /* CompleteJournalView.swift in Sources */,
 				A1D0C865258BAE8D009C5C51 /* Persistence.swift in Sources */,
-				A1D40F4C25D09CC2002DF3C8 /* EditDefaultJournalEntryForm.swift in Sources */,
-				A1D40F4725D054A8002DF3C8 /* PublicTransportJournalDetailView.swift in Sources */,
 				A18302A425DEA78600C54D56 /* EntryDetailView.swift in Sources */,
 				A1C23CEE25DAB90600BC184B /* CreateFromTemplateView.swift in Sources */,
 				A1D0C85E258BAE8A009C5C51 /* ContentView.swift in Sources */,
-				A1D0C890258BB598009C5C51 /* LogbuchEntryView.swift in Sources */,
-				A1D40F3125D011A7002DF3C8 /* JournalListItemView.swift in Sources */,
 				A14D769D25DD78460022DB45 /* CreateTemplateView.swift in Sources */,
 				A1D0C85C258BAE8A009C5C51 /* Cluster_JournalApp.swift in Sources */,
 				A1D40F2825CF206A002DF3C8 /* Extensions.swift in Sources */,
